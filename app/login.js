@@ -7,6 +7,10 @@ const hight = Dimensions.get('window').hight;
 
 
 export  default class Login extends Component{
+  static navigationOptions = {
+    title: 'Login',
+    header:null
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -37,13 +41,13 @@ export  default class Login extends Component{
                       ); 
               }else{
                 this.setState({accessToken:responseData.res.token});
+                this.props.navigation.navigate('Bind');
               }
             })
             .catch((error)=> {
                 Alert.alert(error);
             })
   }
-
   render() {
     return (
       <View style={styles.container}> 

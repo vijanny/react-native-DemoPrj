@@ -3,6 +3,9 @@ import {View, StyleSheet, Text,Button} from 'react-native';
 
 
 export  default class Son extends Component{
+    static navigationOptions = {
+    title: 'son',
+  }
   constructor(props) {
     super(props);
     this.state = {
