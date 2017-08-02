@@ -13,7 +13,7 @@ export  default class Son extends Component{
     alert('you press me ha ha !!');
   }
   _onPressLearnMore(){
-    console.log('you press LearnMore !!');
+    alert('you press LearnMore !!');
   }
   render(){
     return(
