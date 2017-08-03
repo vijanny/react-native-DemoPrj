@@ -5,10 +5,10 @@ import {View, StyleSheet, Text,Button,Image} from 'react-native';
 
 export  default class Son extends Component{
     static navigationOptions = {
-    drawerLabel: '设置',
+    drawerLabel: '喂养助手',
         drawerIcon: ({ tintColor }) => (
       <Image
-        source={require('../img/phone.png')}
+        source={require('../img/feeder.png')}
         style={[styles.icon, {tintColor: tintColor}]}
       />
     ),

@@ -110,7 +110,7 @@ MyNotificationsScreen.navigationOptions = {
 
 const Memu = DrawerNavigator({
     Home: {
-        screen: MyHomeScreen,
+        screen: Blink,
     },
     Notifications: {
          screen: Son,
@@ -123,9 +123,10 @@ const Memu = DrawerNavigator({
       initialRouteName: 'Home', // 默认页面组件
       activeItemKey : 'Notifications',
       labelStyle : {//标签样式
-           // color : 'red',
-           height : 30,
+           fontSize : 18,
+           fontWeight:'normal'
       },
+
       activeTintColor: '#F08A78',  // 选中文字颜色
       activeBackgroundColor: '#fff', // 选中背景颜色
       inactiveTintColor: 'white',  // 未选中文字颜色
@@ -136,11 +137,14 @@ const Memu = DrawerNavigator({
      itemStyle:{
      	borderTopRightRadius:30,
      	borderBottomRightRadius:30,
-     	flexDirection:'row', 
-    	alignItems:'center',
+     },
+     touchableItemStyle:{
+      borderTopRightRadius:30,
+      borderBottomRightRadius:30,
      },
       //没有作用
       onItemPress : (route) => {
+         this.props.navigation.navigate('DrawerClose');
       	 console.log('-------->' )
       },
    },
@@ -181,9 +185,9 @@ const styles = StyleSheet.create({
     alignItems:'center', 
     paddingVertical: 20, 
     paddingHorizontal: 15,
-    marginTop:20,
-    marginBottom:40
+    marginBottom:30
   },
 });
+
 
 export default Memu;

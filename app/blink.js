@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import {View, AppRegistry, StyleSheet, Text} from 'react-native';
+import {View, AppRegistry, StyleSheet, Text,Image} from 'react-native';
 
 export default class Blink extends Component {  
-  static navigationOptions = {
-    title: 'Blink',
-
-  }
+    static navigationOptions = {
+    drawerLabel: '主页',
+        drawerIcon: ({ tintColor }) => (
+      <Image
+        source={require('../img/home.png')}
+        style={[styles.icon, {tintColor: tintColor}]}
+      />
+    ),
+  };
   constructor(props) {  
     super(props);  
     this.state = { 
@@ -25,3 +30,19 @@ export default class Blink extends Component {
     );  
   }  
 }  
+
+const styles = StyleSheet.create({
+  red: {
+    color: 'red',
+    fontSize:28
+  },
+  container:{
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  icon: {
+    width: 24,
+    height: 24,
+  },
+});
