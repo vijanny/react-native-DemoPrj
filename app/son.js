@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
-import {View, StyleSheet, Text,Button} from 'react-native';
+import {View, StyleSheet, Text,Button,Image} from 'react-native';
+
 
 
 export  default class Son extends Component{
     static navigationOptions = {
-    title: 'son',
-  }
+    drawerLabel: '设置',
+        drawerIcon: ({ tintColor }) => (
+      <Image
+        source={require('../img/phone.png')}
+        style={[styles.icon, {tintColor: tintColor}]}
+      />
+    ),
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -16,13 +23,13 @@ export  default class Son extends Component{
     alert('you press me ha ha !!');
   }
   _onPressLearnMore(){
-    alert('you press LearnMore !!');
+    this.props.navigation.navigate('Login');
   }
   render(){
     return(
       <View>
         <Text style = {styles.red}>{this.props.name}</Text>
-        <Button  onPress={this._onPressLearnMore} title="点击" color="#841584"/>
+        <Button  onPress={this._onPressLearnMore.bind(this)} title="点击" color="#841584"/>
       </View>
       
 
@@ -38,5 +45,9 @@ const styles = StyleSheet.create({
     flex:1,
     justifyContent:'center',
     alignItems:'center'
-  }
+  },
+  icon: {
+    width: 24,
+    height: 24,
+  },
 });

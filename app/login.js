@@ -23,6 +23,8 @@ export  default class Login extends Component{
     };
   }
   _onLogin(){
+    this.props.navigation.navigate('Memu');
+/*
             fetch('http://'+this.state.domain+'/miniMasterApp/user/signin', {
             method: 'POST',
             headers:{'Content-Type':'application/json'},
@@ -41,12 +43,15 @@ export  default class Login extends Component{
                       ); 
               }else{
                 this.setState({accessToken:responseData.res.token});
-                this.props.navigation.navigate('Bind');
+                
               }
             })
             .catch((error)=> {
                 Alert.alert(error);
             })
+            */
+
+
   }
   render() {
     return (
@@ -83,9 +88,11 @@ export  default class Login extends Component{
           />
         </View>
         <TouchableHighlight style={styles.loginButton} onPress={this._onLogin.bind(this)} underlayColor='#F9DDD2' >
+          <View>
           <Text style={[{color:'#fff',fontSize:28}]}>
             登录
           </Text>
+          </View>
         </TouchableHighlight>
         <View style={styles.optTextOutLine}>
           <Text style={styles.optText} >忘记密码</Text>

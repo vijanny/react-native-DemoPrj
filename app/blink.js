@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import {View, AppRegistry, StyleSheet, Text} from 'react-native';
 
 export default class Blink extends Component {  
+  static navigationOptions = {
+    title: 'Blink',
+
+  }
   constructor(props) {  
     super(props);  
     this.state = { 
       showText: true,
-      name:props.text
        };  
     // 每1000毫秒对showText状态做一次取反操作  
     setInterval(() => {  
@@ -16,9 +19,9 @@ export default class Blink extends Component {
   
   render() {  
     // 根据当前showText的值决定是否显示text内容  
-    let display = this.state.showText ? this.state.name : ' ';  
+    let display = this.state.showText ? this.state.name : '我一直在闪';  
     return (  
-      <Text style = {this.props.style}>{display}</Text>  
+      <Text >{display}</Text>  
     );  
   }  
 }  
