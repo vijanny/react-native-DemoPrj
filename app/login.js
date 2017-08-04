@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, StyleSheet, Text,Button,Dimensions,Image,TextInput,TouchableHighlight,Alert} from 'react-native';
+import {View, StyleSheet, Text,Button,Dimensions,Image,TextInput,TouchableHighlight,Alert,StatusBar} from 'react-native';
 
 
 const width = Dimensions.get('window').width;
@@ -56,6 +56,7 @@ export  default class Login extends Component{
   render() {
     return (
       <View style={styles.container}> 
+      <StatusBar backgroundColor = '#F08A78'/>
         <Image
         style={styles.icon}
           source={{uri:this.state.userIcon}}

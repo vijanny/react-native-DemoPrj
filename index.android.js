@@ -8,6 +8,7 @@ import {AppRegistry} from 'react-native';
 import {Login,Bind,Memu} from './app/sonBace';
 import { StackNavigator } from 'react-navigation';
 
+
 const nativeBace = StackNavigator({
     Login: { screen: Login },
     Bind: { screen: Bind },
