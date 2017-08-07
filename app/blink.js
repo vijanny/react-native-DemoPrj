@@ -28,12 +28,28 @@ export default class Blink extends Component {
   _onPress(){
     this.props.navigation.navigate('DrawerOpen');
   }
-
   render() {  
     // 根据当前showText的值决定是否显示text内容  
-    let display = this.state.showText ? this.state.name : '我一直在闪';  
+
     return (     
         <View style = {styles.container}>
+          <Header 
+          iconOnPressLeft = {this._onPress.bind(this)}
+          height = {50}
+          iconSrcLeft = {require('../img/menu.png')}
+          title='主页'
+          titleColor = '#F08A78'
+          backgroundColor='white'
+          />
+          <View style={styles.content}>
+            <Text>DFADFAS</Text>
+          </View>
+        </View>
+    );  
+  }  
+}  
+
+/*
           <View style={{backgroundColor:"white",flexDirection:"row",height:headerHeight}}>  
               <View style={{flex:1,flexDirection:'column',justifyContent:'center',paddingLeft:10}}>  
                 <TouchableHighlight   
@@ -60,16 +76,7 @@ export default class Blink extends Component {
                 </View>
               </View>  
           </View>  
-          <View style={styles.content}>
-            <Text>DFADFAS</Text>
-          </View>
-        </View>
-    );  
-  }  
-}  
-
-
-
+*/
 const styles = StyleSheet.create({
   red: {
     color: 'red',
