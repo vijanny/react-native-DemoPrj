@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {View, AppRegistry, StyleSheet, Text,Image,Dimensions,TouchableHighlight   } from 'react-native';
-import {Left, Body, Right,Container,Title} from 'native-base';
+import PercentageCircle from 'react-native-percentage-circle';
+
 import Header from './header';
 
 
@@ -28,9 +29,9 @@ export default class Blink extends Component {
   _onPress(){
     this.props.navigation.navigate('DrawerOpen');
   }
+
   render() {  
     // 根据当前showText的值决定是否显示text内容  
-
     return (     
         <View style = {styles.container}>
           <Header 
@@ -42,41 +43,33 @@ export default class Blink extends Component {
           backgroundColor='white'
           />
           <View style={styles.content}>
-            <Text>DFADFAS</Text>
+               <View  style ={{flexDirection:'row',justifyContent:'center'}}>
+                <Image style ={{width:60,height:60}} source ={require('../img/decrease.png')}/>
+                <PercentageCircle radius={80} percent={100} color={"#F08A78"}  innerColor='#F9DDD2' borderWidth = {10}>
+                  <Text></Text>
+                </PercentageCircle>
+                <Image style ={{width:60,height:60}} source ={require('../img/add.png')}/>  
+              </View>
+              <View  >
+                <PercentageCircle radius={80} percent={100} color={"#F08A78"}  innerColor='#F9DDD2' borderWidth = {5}>
+                  <Text></Text>
+                </PercentageCircle>  
+              </View>
+              <View>
+                <Text> 213213213</Text>
+              </View>
+              <View>
+                <Text> 213213213</Text>
+              </View>
+                            
           </View>
         </View>
     );  
   }  
 }  
 
-/*
-          <View style={{backgroundColor:"white",flexDirection:"row",height:headerHeight}}>  
-              <View style={{flex:1,flexDirection:'column',justifyContent:'center',paddingLeft:10}}>  
-                <TouchableHighlight   
-                    onPress={this._onPress.bind(this)}
-                    style={styles.headerIcon}
-                    underlayColor = '#F5F5F5'
-                  >
-                  <View >
-                      <Image 
-                      style={styles.headerIcon}
-                      source={require('../img/menu.png')}
-                      />
-                  </View>
-                </TouchableHighlight>              
-              </View>  
-              <View style={{flex:1,flexDirection:'column',justifyContent:'center'}}>  
-                <View style = {{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
-                    <Text style={{fontSize:20,color:'#F08A78',fontWeight:'bold'}} >主页</Text>                    
-                </View>
-              </View>  
-              <View style={{flex:1,flexDirection:'column',justifyContent:'center'}}>  
-                <View style = {{flexDirection:'row',alignItems:'center',justifyContent:'flex-end',paddingRight:10}}>
-                   
-                </View>
-              </View>  
-          </View>  
-*/
+
+
 const styles = StyleSheet.create({
   red: {
     color: 'red',
@@ -114,12 +107,13 @@ const styles = StyleSheet.create({
   },
   content:{
     flex:1,
-    justifyContent:'center',
     alignItems:'center',
+    justifyContent:'space-around'
   },
   icon: {
     width: 24,
     height: 24,
   },
 });
+
 

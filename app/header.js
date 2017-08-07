@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
 import {StatusBar ,View,StyleSheet,Text,TouchableHighlight,Image} from 'react-native';
 
+/*
+*iconSrcLeft  左侧图标路径 参考iconSrcLeft =  require('路径') 传参
+*iconOnPressLeft 左侧图标按下响应函数
+*iconSrcRight 右侧图标路径 参考iconSrcLeft =  require('路径') 传参
+*iconOnPressRight 右侧图标按下响应函数
+*titleColor  标题演示
+*title       标题
+*backgroundColor 背景颜色
+*height 高度
+*/
+
+
+
 
 export default class Header extends Component {  
   constructor(props) {  
@@ -13,7 +26,7 @@ export default class Header extends Component {
     const iconSrcRight = this.props.iconSrcRight?this.props.iconSrcRight:null;
     const titleColor   = this.props.titleColor?this.props.titleColor:'#000'
     return (        
-          <View style={{backgroundColor:this.props.backgroundColor,flexDirection:"row",height:this.props.height}}>  
+          <View style={[this.props.style , {backgroundColor:this.props.backgroundColor,flexDirection:"row",height:this.props.height}]}>  
               <View style={{flex:1,flexDirection:'column',justifyContent:'center',paddingLeft:10}}>  
                 <TouchableHighlight   
                     onPress={this.props.iconOnPressLeft}
@@ -35,7 +48,7 @@ export default class Header extends Component {
               </View>  
               <View style={{flex:1,flexDirection:'column',justifyContent:'center'}}>  
                 <View style = {{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
-                    <Text style={{fontSize:20,color:titleColor,fontWeight:'bold'}} >{this.props.title}</Text>                    
+                    <Text style={{fontSize:20,color:titleColor}} >{this.props.title}</Text>                    
                 </View>
               </View>  
               <View style={{flex:1,flexDirection:'column',justifyContent:'center'}}>  
