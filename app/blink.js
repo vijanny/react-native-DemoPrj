@@ -3,7 +3,7 @@ import {View, AppRegistry, StyleSheet, Text,Image,Dimensions,TouchableHighlight,
 import PercentageCircle from 'react-native-percentage-circle';
 import Header from './header';
 import SinWave from './SinWave';
-
+import WaveViewComponent from 'react-native-waveview-android'
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -72,9 +72,20 @@ export default class Blink extends Component {
                       <Image style ={styles.operatePanelIcon} source ={require('../img/decrease.png')}/>
                   </View>
                   <View style={styles.operatePanelCommon}>
-                      <PercentageCircle radius={90} percent={100} color={"#F08A78"}  innerColor='#F9DDD2' borderWidth = {20}>
-                            <Text></Text>                  
-                      </PercentageCircle>
+                    <WaveViewComponent 
+                      style={styles.wave} 
+                      frontWaveColor="#F6F5F5"
+                      behindWaveColor='#FFFFFF'
+                      borderColor='#F08A78'
+                      borderWidth={50}
+                      progress={50}
+                    />
+                    <Image style={[{width:30,height:50,marginTop:-5}]} source={require('../img/thermometer.png')}/>
+                    <Text style={[{fontSize:18}]}>标准浓度10g/100ml</Text>
+                    <View style={[{flexDirection:'row'}]}>
+                      <Image style={[{width:20,height:20}]} source={require('../img/smallThermometer.png')}/>
+                      <Text style={[{fontSize:18}]}>奶温 40℃</Text>
+                    </View>
                   </View>
                   <View style={styles.operatePanelCommon}>
                       <Image style ={styles.operatePanelIcon} source ={require('../img/add.png')}/>
@@ -95,6 +106,10 @@ export default class Blink extends Component {
 
 
 const styles = StyleSheet.create({
+  wave:{
+    width:200,
+    height:200
+  },
   box: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -149,13 +164,15 @@ const styles = StyleSheet.create({
   },
   operatePanelIcon:{
     width:40,
-    height:40
+    height:40,
+    marginTop:-90
   },
   operatePanelCommon:{
     marginLeft:10,
     marginRight:10,
     flexDirection:'column',
-    justifyContent:'center'
+    justifyContent:'center',
+    alignItems:'center'
   },
   operateButton:{
     width:width*85/100,
