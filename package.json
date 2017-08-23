@@ -12,6 +12,7 @@
     "react-native": "0.46.4",
     "react-native-percentage-circle": "^1.0.6",
     "react-native-svg": "^5.4.1",
+    "react-native-swiper": "^1.5.10",
     "react-native-waveview-android": "^1.0.5",
     "react-navigation": "^1.0.0-beta.11"
   },
