@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import {View, AppRegistry, StyleSheet, Text,Image,Dimensions,TouchableHighlight,Alert,Animated,Easing,} from 'react-native';
 import PercentageCircle from 'react-native-percentage-circle';
 import Header from './header';
-import SinWave from './SinWave';
 import WaveViewComponent from 'react-native-waveview-android';
 import Swiper from 'react-native-swiper';
+import Modal from 'react-native-modalbox';
+
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -12,7 +13,31 @@ const headerHeight = 50;
 const screenHeight = height;
 const screenWidth  = width;
 
-const waterLevel=['60','70','80','90','100','110','120','130','140','150','160','170','180','190','200']
+const waterLevel=['60','70','80','90','100','110','120','130','140','150','160','170','180','190','200'];
+const waterLevelInitIndex = 6;
+const concentration =[
+  {
+    name:'稀',
+    progress:20
+  },
+    {
+    name:'淡',
+    progress:30
+  },
+    {
+    name:'标准',
+    progress:50
+  },
+    {
+    name:'浓',
+    progress:70
+  },
+    {
+    name:'特浓',
+    progress:80
+  }];
+
+
 export default class Blink extends Component {  
     static navigationOptions = {
     drawerLabel: '主页',
@@ -28,6 +53,8 @@ export default class Blink extends Component {
     this.state = { 
       milkButtonOn:true,
       waterButtonOn:false,
+      concentrationIndex:2,
+      waterLevel:waterLevel[waterLevelInitIndex]
        };  
     // 每1000毫秒对showText状态做一次取反操作  
   }
@@ -40,18 +67,39 @@ export default class Blink extends Component {
   _waterOnPress(){
     this.setState({milkButtonOn:false,waterButtonOn:true});
   }
+  _decreaseOnPress(){
+     console.log('_decreaseOnPress');
+    let index = this.state.concentrationIndex;
+    if(index>0){
+      index--;
+      this.setState({concentrationIndex:index});
+    }
+  }
+  _addOnPress(){
+    let index = this.state.concentrationIndex;
+    if(index < concentration.length-1){
+      index++;
+      this.setState({concentrationIndex:index});
+    }
+  }
+  _onWaterLeveIndexChanged(index){
+    this.setState({waterLevel:parseInt(waterLevel[index])});
+  }
+  _oneKeyMilkOnPress(){
+    this.refs.modal1.open();
+  }
   render() {
     const animatedStyle = { height: this.animatedHeightValue, width: this.animatedWidthValue };
     const waterLevelList = waterLevel.map(function(el,index){
       return(
-        <View style={styles.slide1}>
-          <Text style={styles.text}>
+        <View style={styles.slide1} key={index}>
+          <Text style={styles.text} key={index}>
             {waterLevel[index]}mL
           </Text>
         </View>
         );
     });
-    return (     
+    return (
         <View style = {styles.container}>
           <Header 
           iconOnPressLeft = {this._onPress.bind(this)}
@@ -80,7 +128,9 @@ export default class Blink extends Component {
               </View>
                <View  style ={styles.operatePanel}>
                   <View style={styles.operatePanelCommon}>
-                      <Image style ={styles.operatePanelIcon} source ={require('../img/decrease.png')}/>
+                      <TouchableHighlight style={styles.operatePanelIcon} underlayColor = '#F9DDD2' activeOpacity={0.5}   onPress={this._decreaseOnPress.bind(this)}>
+                        <Image style ={[{width:40,height:40}]} source ={require('../img/decrease.png')}/>
+                      </TouchableHighlight>
                   </View>
                   <View style={styles.operatePanelCommon}>
                     <View style={styles.wave}>
@@ -90,11 +140,11 @@ export default class Blink extends Component {
                         behindWaveColor='#FFFFFF'
                         borderColor='#F08A78'
                         borderWidth={40}
-                        progress={50}
+                        progress={concentration[this.state.concentrationIndex].progress}
                       />
                       <View style={[{position:'absolute',flexDirection:'row',justifyContent:'center',alignItems:'center'},styles.wave]}>
                           <View style={[{flexDirection:'column',justifyContent:'center',alignItems:'center',paddingTop:20}]}>
-                              <Text style={[{color:'#F08A78',fontSize:38}]}>标准</Text>
+                              <Text style={[{color:'#F08A78',fontSize:38}]}>{concentration[this.state.concentrationIndex].name}</Text>
                               <View style={[{flexDirection:'row',marginTop:10}]}>
                                 <Image style={[{width:22,height:22,marginTop:2}]} source={require('../img/semicircle.png')}/>
                                 <Text style={[{fontSize:20,color:'#F08A78'}]}>浓度</Text>
@@ -110,7 +160,9 @@ export default class Blink extends Component {
                     </View>
                   </View>
                   <View style={styles.operatePanelCommon}>
-                      <Image style ={styles.operatePanelIcon} source ={require('../img/add.png')}/>
+                      <TouchableHighlight style={styles.operatePanelIcon} underlayColor = '#F9DDD2' activeOpacity={0.5}   onPress={this._addOnPress.bind(this)}>
+                        <Image style ={[{width:40,height:40}]} source ={require('../img/add.png')}/>
+                      </TouchableHighlight>
                   </View>
               </View>
               <View style={[{flexDirection:'column',justifyContent:'center',alignItems:'center'}]}>
@@ -119,25 +171,66 @@ export default class Blink extends Component {
                     <Text style={[{fontSize:18}]}>出奶量</Text>
                   </View> 
                   <View style={[{width:width,height:40}]}>
-                    <Swiper style={styles.wrapper} activeDotColor ='#F08A78'>
+                    <Swiper style={styles.wrapper} index = {waterLevelInitIndex}  activeDotColor ='#F08A78' onIndexChanged={this._onWaterLeveIndexChanged.bind(this)}>
                       {waterLevelList}
                     </Swiper>
                   </View>                
               </View>
-              <TouchableHighlight style={styles.operateButton}  underlayColor='#F9DDD2' >
+              <TouchableHighlight style={styles.operateButton}  underlayColor='#F9DDD2' activeOpacity={0.5} onPress={this._oneKeyMilkOnPress.bind(this)}>
                 <View>
                 <Text style={[{color:'#fff',fontSize:28}]}>
                   一键冲奶
                 </Text>
                 </View>
-              </TouchableHighlight>
+              </TouchableHighlight>                           
+              <View></View>
+              <View></View>
           </View>
+          <Modal style={[styles.modal, styles.modal4]} position={"center"} ref={"modal1"} swipeArea={20}>
+
+              <View style={styles.modalInfo}>
+              </View>                      
+              <View style={styles.modalFeeder}>
+                <Image style={styles.modalInfoIcon} source={require('../img/milkBotl.png')}/>
+              </View>        
+          </Modal>           
         </View>
     );  
   }  
 }  
 
 const styles = StyleSheet.create({
+  modal: {
+    flexDirection:'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+    modal4: {
+    width:250,
+    height: 100,
+    marginTop:150,
+    backgroundColor: "transparent"
+  },
+  modalFeeder:{
+    width:100,
+    height:100,
+    borderRadius:50,
+    backgroundColor:'white',
+    position:'absolute',
+    left:0,
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  modalInfo:{
+    width:200,
+    height:70,
+    borderRadius:50,
+    backgroundColor:'#F08A78'
+  },
+  modalInfoIcon:{
+    width:60,
+    height:60
+  },
   wave:{
     width:200,
     height:200
@@ -213,7 +306,7 @@ const styles = StyleSheet.create({
     borderRadius:45,
     alignItems:'center',  
     justifyContent: 'center', 
-    backgroundColor:'#F08A78'
+    backgroundColor:'#F08A78',
   },
   icon: {
     width: 24,
