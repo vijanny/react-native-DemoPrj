@@ -187,12 +187,12 @@ export default class Blink extends Component {
               <View></View>
           </View>
           <Modal style={[styles.modal, styles.modal4]} position={"center"} ref={"modal1"} swipeArea={20}>
-
-              <View style={styles.modalInfo}>
-              </View>                      
+            <View style={styles.modalInfo}>
+                <Text style={[{color:'white',fontSize:18,marginLeft:50}]}>冲奶中...</Text>
+            </View>
               <View style={styles.modalFeeder}>
                 <Image style={styles.modalInfoIcon} source={require('../img/milkBotl.png')}/>
-              </View>        
+              </View>
           </Modal>           
         </View>
     );  
@@ -219,14 +219,21 @@ const styles = StyleSheet.create({
     position:'absolute',
     left:0,
     justifyContent:'center',
-    alignItems:'center'
+    alignItems:'center',
+    shadowColor:'#000',
+    shadowOffset:{h:20,w:20},
+    shadowRadius:3,
+    shadowOpacity:0.8
   },
   modalInfo:{
     width:200,
     height:70,
     borderRadius:50,
-    backgroundColor:'#F08A78'
+    backgroundColor:'#F08A78',
+    justifyContent:'center',
+    alignItems:'center'
   },
+
   modalInfoIcon:{
     width:60,
     height:60
