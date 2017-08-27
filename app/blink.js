@@ -99,6 +99,7 @@ export default class Blink extends Component {
         </View>
         );
     });
+
     return (
         <View style = {styles.container}>
           <Header 
@@ -190,15 +191,17 @@ export default class Blink extends Component {
             <View style={styles.modalInfo}>
                 <Text style={[{color:'white',fontSize:18,marginLeft:50}]}>冲奶中...</Text>
             </View>
-              <View style={styles.modalFeeder}>
-                <Image style={styles.modalInfoIcon} source={require('../img/milkBotl.png')}/>
+              <View style={styles.modalFeederInner}>
+                  <Image style={styles.modalInfoIcon} source={require('../img/milkBotl.png')}/>
               </View>
+              <View style={styles.modalFeederX}>
+                  <Text style={[{color:'#F08A78',fontSize:18}]}>X</Text>
+              </View>                                 
           </Modal>           
         </View>
     );  
   }  
 }  
-
 const styles = StyleSheet.create({
   modal: {
     flexDirection:'row',
@@ -211,20 +214,35 @@ const styles = StyleSheet.create({
     marginTop:150,
     backgroundColor: "transparent"
   },
-  modalFeeder:{
-    width:100,
-    height:100,
+  modalFeederX:{
+    width:25,
+    height:25,
     borderRadius:50,
     backgroundColor:'white',
     position:'absolute',
+    right:20,
+    top:10,
+
+    justifyContent:'center',
+    alignItems:'center',
+  },
+  modalFeederInner:{
+    width:100,
+    height:100,
+    borderRadius:50,
+        position:'absolute',
     left:0,
+    backgroundColor:'white',
     justifyContent:'center',
     alignItems:'center',
     shadowColor:'#000',
     shadowOffset:{h:20,w:20},
     shadowRadius:3,
-    shadowOpacity:0.8
+    shadowOpacity:0.8,   
+    elevation:4
+
   },
+
   modalInfo:{
     width:200,
     height:70,
