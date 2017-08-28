@@ -7,6 +7,7 @@ import Swiper from 'react-native-swiper';
 import Modal from 'react-native-modalbox';
 
 
+
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 const headerHeight = 50;
@@ -89,7 +90,6 @@ export default class Blink extends Component {
     this.refs.modal1.open();
   }
   render() {
-    const animatedStyle = { height: this.animatedHeightValue, width: this.animatedWidthValue };
     const waterLevelList = waterLevel.map(function(el,index){
       return(
         <View style={styles.slide1} key={index}>
@@ -112,14 +112,14 @@ export default class Blink extends Component {
           />
           <View style={styles.content}>
               <View style={styles.operateItem}>
-                <TouchableHighlight style={[styles.operateItemButton,this.state.milkButtonOn?{backgroundColor:'#F08A78'}:null]} onPress={this._milkOnPress.bind(this)} >
+                <TouchableHighlight underlayColor = '#F9DDD2' activeOpacity={0.5} style={[styles.operateItemButton,this.state.milkButtonOn?{backgroundColor:'#F08A78'}:null]} onPress={this._milkOnPress.bind(this)} >
                   <View style={styles.operateItemButtonInner}>
                     {this.state.milkButtonOn?<Image style={{width:20,height:20}} source={require('../img/dot.png')}/>:<Text></Text>}
                     <Text style={styles.operateItemText}>冲奶</Text>  
                     <Text></Text>               
                   </View>
                 </TouchableHighlight>
-                <TouchableHighlight style={[styles.operateItemButton,this.state.waterButtonOn?{backgroundColor:'#F08A78'}:null]} onPress={this._waterOnPress.bind(this)}>
+                <TouchableHighlight underlayColor = '#F9DDD2' activeOpacity={0.5} style={[styles.operateItemButton,this.state.waterButtonOn?{backgroundColor:'#F08A78'}:null]} onPress={this._waterOnPress.bind(this)}>
                   <View style={styles.operateItemButtonInner}>
                     {this.state.waterButtonOn?<Image style={{width:20,height:20}} source={require('../img/dot.png')}/>:<Text></Text>}
                     <Text style={styles.operateItemText}>喝水</Text>  
@@ -128,11 +128,17 @@ export default class Blink extends Component {
                 </TouchableHighlight>
               </View>
                <View  style ={styles.operatePanel}>
+               {
+                this.state.milkButtonOn
+                ?
                   <View style={styles.operatePanelCommon}>
                       <TouchableHighlight style={styles.operatePanelIcon} underlayColor = '#F9DDD2' activeOpacity={0.5}   onPress={this._decreaseOnPress.bind(this)}>
                         <Image style ={[{width:40,height:40}]} source ={require('../img/decrease.png')}/>
                       </TouchableHighlight>
                   </View>
+                :
+                  <View></View>
+                }
                   <View style={styles.operatePanelCommon}>
                     <View style={styles.wave}>
                       <WaveViewComponent 
@@ -141,35 +147,48 @@ export default class Blink extends Component {
                         behindWaveColor='#FFFFFF'
                         borderColor='#F08A78'
                         borderWidth={40}
-                        progress={concentration[this.state.concentrationIndex].progress}
+                        progress={this.state.milkButtonOn?concentration[this.state.concentrationIndex].progress:0}
                       />
+
                       <View style={[{position:'absolute',flexDirection:'row',justifyContent:'center',alignItems:'center'},styles.wave]}>
-                          <View style={[{flexDirection:'column',justifyContent:'center',alignItems:'center',paddingTop:20}]}>
-                              <Text style={[{color:'#F08A78',fontSize:38}]}>{concentration[this.state.concentrationIndex].name}</Text>
-                              <View style={[{flexDirection:'row',marginTop:10}]}>
-                                <Image style={[{width:22,height:22,marginTop:2}]} source={require('../img/semicircle.png')}/>
-                                <Text style={[{fontSize:20,color:'#F08A78'}]}>浓度</Text>
-                              </View>                             
-                          </View>
+                      {
+                        this.state.milkButtonOn
+                        ?                         
+                        <View style={[{flexDirection:'column',justifyContent:'center',alignItems:'center',paddingTop:20}]}>
+                            <Text style={[{color:'#F08A78',fontSize:38}]}>{concentration[this.state.concentrationIndex].name}</Text>
+                            <View style={[{flexDirection:'row',marginTop:10}]}>
+                              <Image style={[{width:22,height:22,marginTop:2}]} source={require('../img/semicircle.png')}/>
+                              <Text style={[{fontSize:20,color:'#F08A78'}]}>浓度</Text>
+                            </View>                             
+                        </View>
+                        :<Image style={[{width:80,height:80}]} source={require('../img/pinkOneCup.png')}/>                        
+                      }                       
                       </View>
                     </View>
                     <Image style={[{width:30,height:50,marginTop:-10}]} source={require('../img/thermometer.png')}/>
-                    <Text style={[{fontSize:18}]}>标准浓度10g/100ml</Text>
+                    {this.state.milkButtonOn?<Text style={[{fontSize:18}]}>标准浓度10g/100ml</Text>:null}
                     <View style={[{flexDirection:'row'}]}>
                       <Image style={[{width:20,height:20}]} source={require('../img/smallThermometer.png')}/>
-                      <Text style={[{fontSize:18}]}>奶温 40℃</Text>
+                      <Text style={[{fontSize:18}]}>{this.state.milkButtonOn?'奶温':'水温'} 40℃</Text>
                     </View>
+                    {this.state.milkButtonOn?null:<Text style={[{fontSize:18}]}> </Text>}
                   </View>
+                {
+                  this.state.milkButtonOn
+                  ?
                   <View style={styles.operatePanelCommon}>
                       <TouchableHighlight style={styles.operatePanelIcon} underlayColor = '#F9DDD2' activeOpacity={0.5}   onPress={this._addOnPress.bind(this)}>
                         <Image style ={[{width:40,height:40}]} source ={require('../img/add.png')}/>
                       </TouchableHighlight>
                   </View>
+                  :
+                  <View></View>
+                }
               </View>
               <View style={[{flexDirection:'column',justifyContent:'center',alignItems:'center'}]}>
                   <View style={[{flexDirection:'row'}]}>
                     <Image style={[{width:22,height:22}]} source={require('../img/cup.png')}/>
-                    <Text style={[{fontSize:18}]}>出奶量</Text>
+                    <Text style={[{fontSize:18}]}>出{this.state.milkButtonOn?'奶':'水'}量</Text>
                   </View> 
                   <View style={[{width:width,height:40}]}>
                     <Swiper style={styles.wrapper} index = {waterLevelInitIndex}  activeDotColor ='#F08A78' onIndexChanged={this._onWaterLeveIndexChanged.bind(this)}>
@@ -180,7 +199,7 @@ export default class Blink extends Component {
               <TouchableHighlight style={styles.operateButton}  underlayColor='#F9DDD2' activeOpacity={0.5} onPress={this._oneKeyMilkOnPress.bind(this)}>
                 <View>
                 <Text style={[{color:'#fff',fontSize:28}]}>
-                  一键冲奶
+                  一键{this.state.milkButtonOn?'冲奶':'出水'}
                 </Text>
                 </View>
               </TouchableHighlight>                           
@@ -189,10 +208,10 @@ export default class Blink extends Component {
           </View>
           <Modal style={[styles.modal, styles.modal4]} position={"center"} ref={"modal1"} swipeArea={20}>
             <View style={styles.modalInfo}>
-                <Text style={[{color:'white',fontSize:18,marginLeft:50}]}>冲奶中...</Text>
+                <Text style={[{color:'white',fontSize:18,marginLeft:50}]}>{this.state.milkButtonOn?'冲奶中':'出水中'}...</Text>
             </View>
               <View style={styles.modalFeederInner}>
-                  <Image style={styles.modalInfoIcon} source={require('../img/milkBotl.png')}/>
+                  <Image style={styles.modalInfoIcon} source={this.state.milkButtonOn?require('../img/milkBotl.png'):require('../img/pinkOneCupMini.png')}/>
               </View>
               <View style={styles.modalFeederX}>
                   <Text style={[{color:'#F08A78',fontSize:18}]}>X</Text>
@@ -202,6 +221,7 @@ export default class Blink extends Component {
     );  
   }  
 }  
+
 const styles = StyleSheet.create({
   modal: {
     flexDirection:'row',
