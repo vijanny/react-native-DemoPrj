@@ -89,6 +89,9 @@ export default class Blink extends Component {
   _oneKeyMilkOnPress(){
     this.refs.modal1.open();
   }
+  _onModalClosePress(){
+    this.refs.modal1.close();
+  }
   render() {
     const waterLevelList = waterLevel.map(function(el,index){
       return(
@@ -213,15 +216,16 @@ export default class Blink extends Component {
               <View style={styles.modalFeederInner}>
                   <Image style={styles.modalInfoIcon} source={this.state.milkButtonOn?require('../img/milkBotl.png'):require('../img/pinkOneCupMini.png')}/>
               </View>
-              <View style={styles.modalFeederX}>
-                  <Text style={[{color:'#F08A78',fontSize:18}]}>X</Text>
+              <View style={styles.modalFeederX} >
+                <TouchableHighlight underlayColor='#fff' activeOpacity={0.5} onPress={this._onModalClosePress.bind(this)}>
+                    <Text style={[{color:'#F08A78',fontSize:16}]}>X</Text>                
+                </TouchableHighlight>
               </View>                                 
           </Modal>           
         </View>
     );  
   }  
 }  
-
 const styles = StyleSheet.create({
   modal: {
     flexDirection:'row',
@@ -245,6 +249,7 @@ const styles = StyleSheet.create({
 
     justifyContent:'center',
     alignItems:'center',
+    overflow:'hidden'
   },
   modalFeederInner:{
     width:100,
