@@ -107,26 +107,24 @@ MyNotificationsScreen.navigationOptions = {
     ),
 };
 
-
 const Memu = DrawerNavigator({
+    Feeder: {
+         screen: Son,
+    },
     Home: {
         screen: Blink,
-    },
-    Notifications: {
-         screen: Son,
     },
 },{
     drawerWidth: width*70/100, // 抽屉宽
     drawerPosition: 'left', // 抽屉在左边还是右边
     // contentComponent: CustomDrawerContentComponent,  // 自定义抽屉组件
     contentOptions: {
-      initialRouteName: 'Home', // 默认页面组件
-      activeItemKey : 'Notifications',
+      initialRouteName: 'Feeder', // 默认页面组件
+      activeItemKey : 'Home',
       labelStyle : {//标签样式
            fontSize : 18,
            fontWeight:'normal'
       },
-
       activeTintColor: '#F08A78',  // 选中文字颜色
       activeBackgroundColor: '#fff', // 选中背景颜色
       inactiveTintColor: 'white',  // 未选中文字颜色

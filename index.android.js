@@ -19,7 +19,7 @@ const nativeBace = StackNavigator({
     	}
     }
   },{
-    initialRouteName:'Login',
+    initialRouteName:'Memu',
   }
 );
 AppRegistry.registerComponent('nativeBace', () => nativeBace);
