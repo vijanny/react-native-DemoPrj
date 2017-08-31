@@ -5,7 +5,8 @@ import Header from './header';
 import WaveViewComponent from 'react-native-waveview-android';
 import Swiper from 'react-native-swiper';
 import Modal from 'react-native-modalbox';
-
+import AnimatedCircleProgress from './CircleProgressComponents/AnimatedCircleProgress'
+import AMAText from './CircleProgressComponents/AMAText'
 
 
 const width = Dimensions.get('window').width;
@@ -102,7 +103,6 @@ export default class Son extends Component {
         </View>
         );
     });
-
     return (
         <View style = {styles.container}>
           <Header 
@@ -114,10 +114,38 @@ export default class Son extends Component {
           backgroundColor='white'
           />
           <View style={styles.content}>
+              <View style={styles.operatePanelCommon}>
+                <View style={styles.wave}>
+                <AnimatedCircleProgress progress={180} progressColor='#F08A78' baseProgressWidth={15} progressWidth={15} raduis={100}>
+                    <View style={{backgroundColor: 'transparent', flex: 1,  alignItems: 'center',justifyContent:'center'}}>
+                    </View>
+                </AnimatedCircleProgress>
+                  <View style={[{position:'absolute',flexDirection:'row',justifyContent:'center',alignItems:'center'},styles.wave]}>
+                  {
+                    this.state.milkButtonOn
+                    ?                         
+                    <View style={[{flexDirection:'column',justifyContent:'center',alignItems:'center',paddingTop:20}]}>
+                        <Text style={[{color:'#F08A78',fontSize:38}]}> 40℃</Text>
+                        <View style={[{flexDirection:'row',marginTop:10}]}>
+                          <Image style={[{width:22,height:22,marginTop:2}]} source={require('../img/pinkSmallThermometer.png')}/>
+                          <Text style={[{fontSize:20,color:'#F08A78'}]}>当前水温</Text>
+                        </View>                             
+                    </View>
+                    :<Image style={[{width:80,height:80}]} source={require('../img/pinkOneCup.png')}/>                        
+                  }                       
+                  </View>
+                </View>
+                <Image style={[{width:30,height:30,marginTop:-10}]} source={require('../img/thermometer.png')}/>
+                <View style={[{flexDirection:'row'}]}>
+                  <Image style={[{width:20,height:20,marginTop:3}]} source={require('../img/exclamationMark.png')}/>
+                  <Text style={[{fontSize:18,marginLeft:5}]}>水已存储8小时</Text>
+                </View>
+                {this.state.milkButtonOn?null:<Text style={[{fontSize:18}]}> </Text>}
+              </View>          
               <TouchableHighlight style={styles.operateButton}  underlayColor='#F9DDD2' activeOpacity={0.5} onPress={this._oneKeyMilkOnPress.bind(this)}>
                 <View>
                 <Text style={[{color:'#fff',fontSize:28}]}>
-                  一键{this.state.milkButtonOn?'冲奶':'出水'}
+                  喂养设定
                 </Text>
                 </View>
               </TouchableHighlight>                           
