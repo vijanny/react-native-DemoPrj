@@ -140,7 +140,48 @@ export default class Son extends Component {
                   <Image style={[{width:20,height:20,marginTop:3}]} source={require('../img/exclamationMark.png')}/>
                   <Text style={[{fontSize:18,marginLeft:5}]}>水已存储8小时</Text>
                 </View>
-                {this.state.milkButtonOn?null:<Text style={[{fontSize:18}]}> </Text>}
+              </View>
+              <View style={[{width:width*80/100}]}>
+                  <View style={styles.devInfoContainer}>
+                      <View style={styles.devInfoItem}> 
+                        <View style={styles.devInfoItemLeft}>
+                          <Image style={styles.devInfoItemLeftImage} source={require('../img/loop.png')}/>
+                          <Text style={styles.devInfoItemText}>消毒</Text>                          
+                        </View>
+                        <Text style={styles.devInfoItemText}>2天10小时前</Text>
+                      </View>
+                      <Image style={styles.devInfoLine} source={require('../img/line.png')}/>
+                  </View>
+                  <View style={styles.devInfoContainer}>
+                      <View style={styles.devInfoItem}> 
+                        <View style={styles.devInfoItemLeft}>
+                          <Image style={styles.devInfoItemLeftImage} source={require('../img/waterBox.png')}/>
+                          <Text style={styles.devInfoItemText}>水箱</Text>                          
+                        </View>
+                        <Image style={styles.devInfoItemRightImage} source={require('../img/checked.png')}/>
+                      </View>
+                      <Image style={styles.devInfoLine} source={require('../img/line.png')}/>
+                  </View>
+                  <View style={styles.devInfoContainer}>
+                      <View style={styles.devInfoItem}> 
+                        <View style={styles.devInfoItemLeft}>
+                          <Image style={styles.devInfoItemLeftImage} source={require('../img/mixBox.png')}/>
+                          <Text style={styles.devInfoItemText}>混合器</Text>                          
+                        </View>
+                        <Image style={styles.devInfoItemRightImage} source={require('../img/checked.png')}/>
+                      </View>
+                      <Image style={styles.devInfoLine} source={require('../img/line.png')}/>
+                  </View>
+                  <View style={styles.devInfoContainer}>
+                      <View style={styles.devInfoItem}> 
+                        <View style={styles.devInfoItemLeft}>
+                          <Image style={styles.devInfoItemLeftImage} source={require('../img/powderBox.png')}/>
+                          <Text style={styles.devInfoItemText}>粉盒</Text>                          
+                        </View>
+                        <Image style={styles.devInfoItemRightImage} source={require('../img/error.png')}/>
+                      </View>
+                      <Image style={styles.devInfoLine} source={require('../img/line.png')}/>
+                  </View>
               </View>          
               <TouchableHighlight style={styles.operateButton}  underlayColor='#F9DDD2' activeOpacity={0.5} onPress={this._oneKeyMilkOnPress.bind(this)}>
                 <View>
@@ -169,7 +210,41 @@ export default class Son extends Component {
     );  
   }  
 }  
+
+
 const styles = StyleSheet.create({
+  devInfoItemText:{
+    fontSize:18,
+    marginLeft:5
+  },
+  devInfoItemLeftImage:{
+    width:30,
+    height:30
+  },
+  devInfoItemRightImage:{
+    width:20,
+    height:20
+  },
+  devInfoLine:{
+    width:width*80/100,
+    height:3,
+    resizeMode:'stretch'
+  },
+  devInfoContainer:{
+    width:width*80/100,
+    flexDirection:'column',
+    justifyContent:'center',
+    alignItems:'center',
+    marginTop:10
+  },
+  devInfoItem:{
+    width:width*70/100,
+    flexDirection:'row',
+    justifyContent:'space-between'
+  },
+  devInfoItemLeft:{
+    flexDirection:'row'
+  },
   modal: {
     flexDirection:'row',
     justifyContent: 'center',

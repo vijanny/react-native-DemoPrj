@@ -164,8 +164,8 @@ export default class Blink extends Component {
                               <Text style={[{fontSize:20,color:'#F08A78'}]}>浓度</Text>
                             </View>                             
                         </View>
-                        :<Image style={[{width:80,height:80}]} source={require('../img/pinkOneCup.png')}/>                        
-                      }                       
+                        : <Image style={[{width:80,height:80}]} source={require('../img/pinkOneCup.png')}/>                        
+                      } 
                       </View>
                     </View>
                     <Image style={[{width:30,height:50,marginTop:-10}]} source={require('../img/thermometer.png')}/>
