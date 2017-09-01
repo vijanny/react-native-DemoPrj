@@ -14,7 +14,7 @@ const screenHeight = height;
 const screenWidth  = width;
 
 
-export default class Son extends Component {  
+export default class feederOpt extends Component {  
   constructor(props) {  
     super(props);  
     this.state = { 
@@ -23,7 +23,7 @@ export default class Son extends Component {
     // 每1000毫秒对showText状态做一次取反操作  
   }
   _onPress(){
-    this.props.navigation.navigate('DrawerOpen');
+    this.props.navigation.goBack();
   }
   _milkOnPress(){
 
@@ -39,8 +39,7 @@ export default class Son extends Component {
   _onWaterLeveIndexChanged(index){
   }
   _oneKeyMilkOnPress(){
-    //this.refs.modal1.open();
-    this.props.navigation.navigate('feederOpt');
+    this.refs.modal1.open();
   }
   _onModalClosePress(){
     this.refs.modal1.close();
@@ -52,8 +51,8 @@ export default class Son extends Component {
           <Header 
           iconOnPressLeft = {this._onPress.bind(this)}
           height = {50}
-          iconSrcLeft = {require('../img/menu.png')}
-          title='喂养助手'
+          iconSrcLeft = {require('../img/left.png')}
+          title='喂养助手OPT'
           titleColor = '#F08A78'
           backgroundColor='white'
           />

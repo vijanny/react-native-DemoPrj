@@ -54,7 +54,7 @@ import {
 
 
 import Blink from './blink'
-import Son from'./son'
+import feederIndex from'./feederIndex'
 
 const width = Dimensions.get('window').width;
 const hight = Dimensions.get('window').hight;
@@ -109,7 +109,16 @@ MyNotificationsScreen.navigationOptions = {
 
 const Memu = DrawerNavigator({
     Feeder: {
-         screen: Son,
+         screen: feederIndex,
+         navigationOptions:{
+            drawerLabel: '喂养助手',
+            drawerIcon: ({ tintColor }) => (
+              <Image
+                source={require('../img/feeder.png')}
+                style={[styles.icon, {tintColor: tintColor}]}
+              />
+            ),          
+         }
     },
     Home: {
         screen: Blink,
